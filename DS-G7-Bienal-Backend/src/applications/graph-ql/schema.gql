@@ -1,0 +1,112 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SculptorObjectType {
+  userId: Float!
+  user: UserObjectType!
+  obrasPrevias: String
+  biografia: String
+  qr: String
+}
+
+type TokenAllObjectType {
+  token: String
+  expiresAt: DateTime
+  user: UserObjectType
+  id: Float!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserObjectType {
+  name: String
+  lastname: String
+  email: String
+  password: String
+  phoneNumber: String
+  dni: String
+  role: Role
+  sculptor: SculptorObjectType
+  createdAt: DateTime
+  updatedAt: DateTime
+  tokens: [TokenAllObjectType!]
+}
+
+enum Role {
+  ESCULTOR
+  ADMIN
+  VISITANTE
+}
+
+type UserAllObjectType {
+  name: String
+  lastname: String
+  email: String
+  password: String
+  phoneNumber: String
+  dni: String
+  role: Role
+  sculptor: SculptorObjectType
+  createdAt: DateTime
+  updatedAt: DateTime
+  tokens: [TokenAllObjectType!]
+  id: Float!
+}
+
+input SculptorInputType {
+  userId: Float!
+  user: UserInputType!
+  obrasPrevias: String
+  biografia: String
+  qr: String
+}
+
+input TokenAllInputType {
+  token: String
+  expiresAt: DateTime
+  user: UserInputType
+  id: Float!
+}
+
+input UserInputType {
+  name: String
+  lastname: String
+  email: String
+  password: String
+  phoneNumber: String
+  dni: String
+  role: Role
+  sculptor: SculptorInputType
+  createdAt: DateTime
+  updatedAt: DateTime
+  tokens: [TokenAllInputType!]
+}
+
+input UserAllInputType {
+  name: String
+  lastname: String
+  email: String
+  password: String
+  phoneNumber: String
+  dni: String
+  role: Role
+  sculptor: SculptorInputType
+  createdAt: DateTime
+  updatedAt: DateTime
+  tokens: [TokenAllInputType!]
+  id: Float!
+}
+
+type Query {
+  users: [UserAllObjectType!]!
+  exampleQuery: JSON!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
