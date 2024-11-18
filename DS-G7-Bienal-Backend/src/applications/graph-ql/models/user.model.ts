@@ -16,28 +16,16 @@ export class UserObjectType {
   email?: string;
 
   @Field(() => String, { nullable: true })
-  password?: string;
-
-  @Field(() => String, { nullable: true })
   phoneNumber?: string;
 
   @Field(() => String, { nullable: true })
   dni?: string;
-
-  @Field(() => Role, { nullable: true })
-  role?: Role;
-
-  @Field(() => SculptorObjectType, { nullable: true })
-  sculptor?: SculptorObjectType;
 
   @Field(() => Date, { nullable: true })
   createdAt?: Date;
 
   @Field(() => Date, { nullable: true })
   updatedAt?: Date;
-
-  @Field(() => [TokenAllObjectType], { nullable: true })
-  tokens?: TokenAllObjectType[];
 }
 
 @ObjectType('UserAllObjectType')

@@ -1,7 +1,8 @@
 # compiled output
-/dist
-/node_modules
-/build
+DS-G7-Bienal-Backend/dist
+DS-G7-Bienal-Backend/node_modules
+DS-G7-Bienal-Backend/build
+DS-G7-Bienal-Backend/*.tsbuildinfo
 
 # Logs
 logs
@@ -57,7 +58,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+DS-G7-Bienal-Backend/node_modules
+DS-G7-Bienal-Frontend/node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -66,8 +68,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /coverage
 
 # next.js
-/.next/
-/out/
+DS-G7-Bienal-Frontend/.next/
+DS-G7-Bienal-Frontend/out/
+DS-G7-Bienal-Frontend/next-env.d.ts
+DS-G7-Bienal-Frontend/*.tsbuildinfo
 
 # production
 /build
@@ -90,3 +94,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+

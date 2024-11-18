@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma as PrismaService } from '@prisma';
 import { RegisterUsuarioDto } from '@dto';
 import * as bcrypt from 'bcryptjs';
+import { UserAllObjectType } from '@graph-ql/models/user.model';
 
 @Injectable()
 export class UserRepository {
@@ -29,5 +30,14 @@ export class UserRepository {
       password: hashedPassword,
       role: 'ADMIN', // Establecer el rol a ADMIN
     }, });
+  }
+
+  async findAll(): Promise<UserAllObjectType[]> {
+    return await this.prisma.user.findMany({
+      where: {
+        role: 'VISITANTE'
+      }
+    });
+
   }
 }
