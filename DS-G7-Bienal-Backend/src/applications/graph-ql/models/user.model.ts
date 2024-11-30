@@ -1,7 +1,4 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { SculptorObjectType } from './sculptor.model';
-import { Role } from './enumRole.model';
-import { TokenAllObjectType } from './token.model';
 
 @ObjectType('UserObjectType')
 @InputType('UserInputType')
