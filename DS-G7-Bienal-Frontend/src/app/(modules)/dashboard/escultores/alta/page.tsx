@@ -16,10 +16,14 @@ export default function Page({searchParams}: {
     <div className="min-h-screen bg-white p-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Dar de Alta un Escultor</h1>
       <Search/>
-      <Suspense fallback={<TableUserSkeleton/>}>
-
-        <TableUser params={search}/>
-      </Suspense>
+      <TableUser params={search}/>
+      {
+        /*
+        <Suspense fallback={<TableUserSkeleton/>}>
+        
+        </Suspense>
+        */
+      }
     </div>
   )
 }

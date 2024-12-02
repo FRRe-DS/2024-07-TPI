@@ -6,7 +6,7 @@ import { EventsRepository } from "@prisma";
 
 
 @Injectable()
-export class EventBussiness extends ResponseClass{
+export class EventBusiness extends ResponseClass{
     constructor(
         private readonly eventRepository:EventsRepository,
         private readonly tematicRepository:TematicRepository

@@ -1,12 +1,10 @@
 import { AuthBusiness } from '@business';
-import { GetUser } from '@business/auth/auth.decorators';
-import { JwtAuthGuard } from '@business/auth/jwt.guard';
+import { JwtAuthGuard, JwtRoleAdminGuard } from '@business/auth/jwt.guard';
 import { LoginDto, RegisterUsuarioDto } from '@dto';
 import { ResponseInterface } from '@interfaces';
 import { LoginResponseInterface } from '@interfaces/services/login.interface';
-import { Controller, Post, Body, UnauthorizedException, ValidationPipe, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, Body, ValidationPipe, Get, UseGuards, Req, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { User } from '@prisma/client';
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +15,7 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'User logged in successfully.' })
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
   public async login(@Body(new ValidationPipe()) loginDto: LoginDto): Promise<ResponseInterface<LoginResponseInterface>>  {
+    console.log("asadsasadsadsdsa")
     return await this.authBusiness.login(loginDto) as Promise<
       ResponseInterface<LoginResponseInterface>
     >;;  
@@ -48,6 +47,12 @@ export class AuthController {
     
   ): Promise<ResponseInterface<{message : string}>> {
     return await this.authBusiness.registerAdmin();
+  }
+
+  @Patch('upgrade/:id')
+  @UseGuards(JwtRoleAdminGuard)
+  async upgradeUserRole(@Param('id', ParseIntPipe) id: number) {
+    return await this.authBusiness.upgradeUserRole(id);
   }
 }
 

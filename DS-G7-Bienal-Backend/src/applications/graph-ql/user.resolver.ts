@@ -7,10 +7,10 @@ import GraphQLJSON from 'graphql-type-json';
 export class UserResolver {
   constructor(private readonly userRepository: UserRepository) {}
 
-  @Query(() => [UserAllObjectType])
-  async users(): Promise<UserAllObjectType[]> {
-    return this.userRepository.findAll();
-  }
+  //@Query(() => [UserAllObjectType])
+  //async users(): Promise<UserAllObjectType[]> {
+    //return this.userRepository.findAll();
+  //}
 
   @Query(() => GraphQLJSON)
   exampleQuery(): any {

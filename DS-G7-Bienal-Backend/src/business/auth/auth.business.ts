@@ -54,9 +54,16 @@ export class AuthBusiness extends ResponseClass {
     });
   }
 
+
+  async upgradeUserRole(id:number){
+    const user = await this.userRepository.updateRoleUser(id)
+    if(!user) return this.badRequest('Error, no se pudo obtener el usuario');
+    return this.success({
+      message: `Usuario ${user.name} ahora es un escultor`,
+    });
+  }
+
   async registerAdmin() {
-
-
     await this.userRepository.registerAdmin();
 
     return this.success({

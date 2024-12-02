@@ -33,10 +33,11 @@ model User {
   updatedAt   DateTime  @updatedAt
   tokens      Token[]  
 }
+
 model Sculptor {
   userId Int  @id
-  user   User @relation(fields: [userId], references: [id])
-
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scultures Sculpture[]
   obrasPrevias String?
   biografia    String?
   qr           String?
@@ -63,5 +64,26 @@ model Event {
   dateEnd   DateTime
   lugar     String
   descripcion String
+  sculptures Sculpture[]
   tematic Tematic @relation(fields:[tematicId], references: [id])
+}
+
+model Sculpture {
+  id Int  @id @default(autoincrement())
+  eventId Int
+  event Event @relation(fields: [eventId], references: [id])
+  sculptorId Int
+  sculptor Sculptor @relation(fields: [sculptorId], references: [userId], onDelete: Cascade)
+  name String
+  description String
+  createdAt DateTime  @default(now())
+  qr String?
+  images Image[]
+}
+
+model Image {
+  id Int @unique @default(autoincrement())
+  url String
+  sculptureId Int
+  sculpture Sculpture @relation(fields: [sculptureId], references: [id])
 }

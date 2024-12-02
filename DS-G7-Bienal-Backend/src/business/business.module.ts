@@ -5,17 +5,27 @@ import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from '@prisma/prisma.module';
 import { AuthBusiness } from './auth/auth.business';
 import { JwtStrategy } from './auth/jwt.strategy';
-import { EventBussiness } from './events/events.business';
+import { EventBusiness } from './events/events.business';
+import { SculptureBusiness } from './sculptures/sculptures.business';
+import { CloudinaryService } from './cloudinary/cloudinary.service';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { UserBusiness } from './users/user.business';
+import { TematicBusiness } from './tematic/tematic.business';
 
 const providers: Provider<any>[] = [
   AuthBusiness,
   JwtStrategy,
-  EventBussiness
+  EventBusiness,
+  SculptureBusiness,
+  CloudinaryService,
+  UserBusiness,
+  TematicBusiness
 ];
 
 @Module({
   imports: [
     PrismaModule,
+    CloudinaryModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: jwtFactory,

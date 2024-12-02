@@ -1,4 +1,4 @@
-import { EventBussiness } from "@business/events/events.business";
+import { EventBusiness } from "@business/events/events.business";
 import { CreateEventDto } from "@dto/events.dto";
 import { ResponseInterface } from "@interfaces";
 import { CreateEventInterface, EventsListInterface } from "@interfaces/services/events.interface";
@@ -7,7 +7,7 @@ import { ApiOperation, ApiResponse } from "@nestjs/swagger";
 
 @Controller('event')
 export class EventController {
-    constructor(private readonly eventService:EventBussiness){}
+    constructor(private readonly eventService:EventBusiness){}
 
     @Get('list')
     @ApiOperation({ summary: 'Events list' })

@@ -14,8 +14,8 @@ export default async function Home() {
   });
   const data = await res.json();
 
-  let eventos:Evento[] = []
-  eventos = await data.payload.events;
+  
+  const eventos: Evento[] = data.payload.events || [];
   
 
   return (

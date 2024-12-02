@@ -1,5 +1,6 @@
+"use client"
 import { Evento } from '@bienal/app/types/eventosType';
-import { MapPin, Calendar, PencilIcon, TrashIcon, CalendarIcon, MapPinIcon } from 'lucide-react';
+import {PencilIcon, TrashIcon, CalendarIcon, MapPinIcon } from 'lucide-react';
 
 export function EventEditCard({ evento, index }: { evento: Evento; index: number }) {
     const handleEdit = (evento: Evento) => {
@@ -24,8 +25,8 @@ export function EventEditCard({ evento, index }: { evento: Evento; index: number
     <div key={index} className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
         <div className="flex justify-between items-start">
             <div>
-            <h2 className="text-2xl font-semibold text-emerald-800 mb-2">{evento.nombre}</h2>
-            <p className="text-gray-600 mb-2">{evento.tematica.nombre}</p>
+            <h2 className="text-2xl font-semibold text-emerald-800 mb-2">{evento.name}</h2>
+            <p className="text-gray-600 mb-2">{evento.tematic.name}</p>
             </div>
             <div className="flex space-x-2">
             <button
@@ -47,7 +48,7 @@ export function EventEditCard({ evento, index }: { evento: Evento; index: number
         <div className="mt-4 space-y-2">
             <p className="flex items-center text-gray-600">
             <CalendarIcon className="h-5 w-5 mr-2 text-emerald-800" />
-            {formatDate(evento.fechaInicio)} - {formatDate(evento.fechaFin)}
+            {formatDate(evento.dateStart)} - {formatDate(evento.dateEnd)}
             </p>
             <p className="flex items-center text-gray-600">
             <MapPinIcon className="h-5 w-5 mr-2 text-emerald-800" />

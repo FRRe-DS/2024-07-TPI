@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import VisualPasswodIcon from "@bienal/app/ui/components/VisualPasswordIcon";
 import { AppDispatch, RootState } from "@bienal/store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "@bienal/store/slices/userSlice";
+import { loginUser, removeError } from "@bienal/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -26,12 +26,25 @@ export default function LoginPage() {
     if(user){
       router.push("/")
     }
+
+    
   })
+
+  useEffect(() => {
+    if (error) {
+      const timeout = setTimeout(() => {
+        dispatch(removeError());
+      }, 8000);
+  
+      return () => clearTimeout(timeout);
+    }
+  }, [error])
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const dispatch: AppDispatch = useDispatch();
+
 
   const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
@@ -98,7 +111,7 @@ export default function LoginPage() {
         </div>
         {
           error &&
-          <p className="text-sm text-red-600 mt-1 flex justify-center mt-4">
+          <p className="text-sm text-red-600 flex justify-center mt-4">
             {error} 
             
           </p>

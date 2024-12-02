@@ -5,12 +5,14 @@ import {
 import { Prisma } from './prisma';
 import { EventsRepository } from './events.repository';
 import { TematicRepository } from './tematic.repository';
+import { SculptureRepository } from './sculpture.repository';
 
 const provider = [
   Prisma,
   UserRepository,
   EventsRepository,
-  TematicRepository
+  TematicRepository,
+  SculptureRepository
 ];
 
 @Module({

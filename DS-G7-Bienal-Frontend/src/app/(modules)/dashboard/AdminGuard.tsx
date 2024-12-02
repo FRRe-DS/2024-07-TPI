@@ -1,6 +1,5 @@
 "use client";
 
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { AppDispatch, RootState } from '@bienal/store/store';
 import { ReactNode, useEffect, useState } from 'react';
@@ -15,14 +14,13 @@ interface AuthGuardProps {
 export default function FetchUser({children,}: Readonly<{children: React.ReactNode;}>) {
     const [loading, setLoading] = useState(true); 
     const router = useRouter();
-    const dispatch: AppDispatch = useDispatch();
+    //const dispatch: AppDispatch = useDispatch();
 
     
     
     useEffect(() => {
         async function getRole() {
             try {
-                console.log('asdsa')
                 setLoading(true)
                 let accessToken = localStorage.getItem('accessToken');
                 
@@ -37,8 +35,6 @@ export default function FetchUser({children,}: Readonly<{children: React.ReactNo
                 });
                 
                 const role =response.data.role 
-                console.log("SDsdsadas")
-                console.log(role)
                 if (role !=='ADMIN'){
                     return router.push('/')
                 };

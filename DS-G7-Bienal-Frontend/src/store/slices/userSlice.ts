@@ -77,8 +77,8 @@ export const registerDefaultUser = createAsyncThunk(
             
             return response.data.payload.message
         } catch (error: any) {
-             
-            return thunkAPI.rejectWithValue('Error al Registrarse');
+            //console.log(error)
+            return thunkAPI.rejectWithValue(error.response.data.message);
         }
     }
 )
@@ -89,13 +89,11 @@ export const loginUser = createAsyncThunk(
          
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login`, credentials)
-            console.log(response)        
             localStorage.setItem('accessToken', response.data.payload.access_token);
     
             return response.data.payload.user            
         } catch (error: any) {
-            
-            return thunkAPI.rejectWithValue('Error al iniciar sesion');
+            return thunkAPI.rejectWithValue(error.response.data.message);
         }
     }
 )
@@ -132,7 +130,7 @@ const userSlice = createSlice({
         })
         .addCase(loginUser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload as string; 
+            state.error = action.payload as string|| "Error al iniciar sesion"; 
         })
 
         .addCase(registerDefaultUser.pending, (state) => {
@@ -146,7 +144,7 @@ const userSlice = createSlice({
         })
         .addCase(registerDefaultUser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload as string; 
+            state.error = action.payload as string || "Error al registrarse"; 
             state.user = null
         })
 
