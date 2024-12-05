@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 import { TematicDto } from './tematic.dto';
 
 
@@ -30,12 +30,42 @@ export class CreateEventDto {
     tematic: string;
 }
 
+export class EditEventDto {
+    @ApiProperty()
+    @IsOptional()
+    name: string;
+
+    @ApiProperty()
+    @IsOptional()
+    dateStart: Date;
+
+    @ApiProperty()
+    @IsOptional()
+    dateEnd: Date;
+
+    @ApiProperty()
+    @IsOptional()
+    lugar: string;
+
+    @ApiProperty()
+    @IsOptional()
+    descripcion: string;
+        
+    @ApiProperty()
+    @IsOptional()
+    tematicId: number;
+}
+
 
 export class eventsDto {
     
     @ApiProperty()
     @IsNotEmpty()
     id: number;
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsUUID()
+    uuid:string
 
     @ApiProperty()
     @IsNotEmpty()

@@ -1,7 +1,7 @@
 "use client";
 
-import { Provider, useSelector } from 'react-redux';
-import store, { RootState } from "@bienal/store/store";
+import { useSelector } from 'react-redux';
+import  { RootState } from "@bienal/store/store";
 import { UserCircle } from 'lucide-react';
 import Navbar from '@bienal/app/ui/components/Navbar';
 

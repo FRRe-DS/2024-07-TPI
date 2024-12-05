@@ -1,32 +1,25 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export interface AbsUser {
+export interface User {
     id:number;
     email:string;
     name:string;
     lastname:string;
     phoneNumber:string;
     dni: string;
-    role: string
+    role: "ADMIN" | "VISITANTE" | "ESCULTOR";
+    esculptor? : {
+        biografia?:string | null
+        qr?:string|null
+        obrasPrevias:string|null
+    }
 }
 
-export interface Usuario extends AbsUser{
-    role: 'VISITANTE'
-}
 
-export interface Escultor extends AbsUser {
-    biografia:string;
-    role: 'ESCULTOR'
-}
-
-export interface Admin extends AbsUser {
-    
-    role: 'ADMIN'
-}
 
 export interface UserState{
-    user: Usuario | Escultor | Admin | null;
+    user: User | null;
     error:string | null;
     msg:string|null;
     loading: boolean;
@@ -122,7 +115,7 @@ const userSlice = createSlice({
             state.error = null;
             state.loading = true
         })
-        .addCase(loginUser.fulfilled, (state, action:PayloadAction<Usuario|Escultor|Admin>) => {
+        .addCase(loginUser.fulfilled, (state, action:PayloadAction<User>) => {
             state.user = action.payload;
             state.error = null;
             state.loading = false
@@ -153,7 +146,7 @@ const userSlice = createSlice({
             state.loading = true
             state.isAuth = false
         })
-        .addCase(fetchUserByToken.fulfilled, (state, action:PayloadAction<Usuario|Admin|Escultor>) => {
+        .addCase(fetchUserByToken.fulfilled, (state, action:PayloadAction<User>) => {
             state.user = action.payload;
             state.error = null;
             state.loading = false;

@@ -31,7 +31,8 @@ model User {
   sculptor    Sculptor?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  tokens      Token[]  
+  tokens      Token[] 
+  votes Vote[] 
 }
 
 model Sculptor {
@@ -59,7 +60,8 @@ model Tematic {
 model Event {
   id Int  @id @default(autoincrement())
   tematicId Int
-  name String
+  uuid String @unique @default(uuid())
+  name String 
   dateStart DateTime
   dateEnd   DateTime
   lugar     String
@@ -70,8 +72,9 @@ model Event {
 
 model Sculpture {
   id Int  @id @default(autoincrement())
+  uuid String @unique @default(uuid())
   eventId Int
-  event Event @relation(fields: [eventId], references: [id])
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
   sculptorId Int
   sculptor Sculptor @relation(fields: [sculptorId], references: [userId], onDelete: Cascade)
   name String
@@ -79,11 +82,25 @@ model Sculpture {
   createdAt DateTime  @default(now())
   qr String?
   images Image[]
+  votes Vote[]
 }
 
 model Image {
   id Int @unique @default(autoincrement())
   url String
   sculptureId Int
-  sculpture Sculpture @relation(fields: [sculptureId], references: [id])
+  sculpture Sculpture @relation(fields: [sculptureId], references: [id], onDelete: Cascade)
+}
+
+model Vote {
+  id           Int      @id @default(autoincrement())
+  sculptureId  Int
+  sculpture    Sculpture @relation(fields: [sculptureId], references: [id], onDelete: Cascade)
+
+  userId       Int     
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  calification Int
+
+  @@unique([userId, sculptureId]) 
 }

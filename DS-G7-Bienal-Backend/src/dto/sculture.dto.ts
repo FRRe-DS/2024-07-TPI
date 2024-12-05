@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class CreateScultureDto {
     @ApiProperty()
@@ -26,6 +26,37 @@ export class CreateScultureDto {
     @IsOptional()
     qr: string;
 
+}
+
+export class EditScultureDto {
+    @ApiProperty()
+    @IsNumber()
+    @IsOptional()
+    @Transform(({ value }) => (value ? parseInt(value, 10) : value))
+    eventId:number
+
+    @ApiProperty()
+    @IsNumber()
+    @IsOptional()
+    scultorId: number;
+
+    @ApiProperty()
+    @IsOptional()
+    name: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsOptional()
+    description: string;
+
+    @ApiProperty()
+    @IsOptional()
+    qr: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsArray()
+    images: Express.Multer.File[];
 }
 
 export class CreateScultureRequestDto {

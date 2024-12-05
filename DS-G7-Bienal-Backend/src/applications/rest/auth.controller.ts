@@ -3,6 +3,7 @@ import { JwtAuthGuard, JwtRoleAdminGuard } from '@business/auth/jwt.guard';
 import { LoginDto, RegisterUsuarioDto } from '@dto';
 import { ResponseInterface } from '@interfaces';
 import { LoginResponseInterface } from '@interfaces/services/login.interface';
+import { SculptorInterface, UserInterface } from '@interfaces/services/users.interface';
 import { Controller, Post, Body, ValidationPipe, Get, UseGuards, Req, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
@@ -15,7 +16,6 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'User logged in successfully.' })
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
   public async login(@Body(new ValidationPipe()) loginDto: LoginDto): Promise<ResponseInterface<LoginResponseInterface>>  {
-    console.log("asadsasadsadsdsa")
     return await this.authBusiness.login(loginDto) as Promise<
       ResponseInterface<LoginResponseInterface>
     >;;  
@@ -33,9 +33,35 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('me') 
-  getMe(@Req() req) {
-    
-    return req.user;  
+  public async getMe(@Req() req) {
+    const user = req.user
+    //let profile:SculptorInterface | null = null
+    const sculptor = await this.authBusiness.getSculptorProfile(user.id)
+    console.log(sculptor)
+
+    let response:UserInterface = {
+      id: user.id,
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      role: user.role,
+      dni:user.dni,
+   
+    }
+
+    if(sculptor !== null){
+      console.log("********************")
+      response.escultor = {
+        qr: sculptor.qr,
+        obrasPrevias: sculptor.obrasPrevias,
+        biografia: sculptor.biografia
+      }
+    }
+
+
+
+    return response;  
   }
 
 

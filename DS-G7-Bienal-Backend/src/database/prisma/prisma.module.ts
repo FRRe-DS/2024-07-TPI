@@ -6,13 +6,19 @@ import { Prisma } from './prisma';
 import { EventsRepository } from './events.repository';
 import { TematicRepository } from './tematic.repository';
 import { SculptureRepository } from './sculpture.repository';
+import { SculptorRepository } from './sculptor.repository';
+import { ImagesRepository } from './images.repository';
+import { VotesRepository } from './votes.repository';
 
 const provider = [
   Prisma,
   UserRepository,
   EventsRepository,
   TematicRepository,
-  SculptureRepository
+  SculptureRepository,
+  SculptorRepository,
+  ImagesRepository,
+  VotesRepository
 ];
 
 @Module({

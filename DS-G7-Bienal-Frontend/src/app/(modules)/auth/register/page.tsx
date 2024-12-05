@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import VisualPasswodIcon from "@bienal/app/ui/components/VisualPasswordIcon";
 import { AppDispatch, RootState } from "@bienal/store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, registerDefaultUser } from "@bienal/store/slices/userSlice";
+import { registerDefaultUser } from "@bienal/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

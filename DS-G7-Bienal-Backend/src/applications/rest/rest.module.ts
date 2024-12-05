@@ -7,9 +7,11 @@ import { ImagesController } from './cloudinary.controller';
 import { SculptureController } from './sculpture.controller';
 import { UsersController } from './users.controller';
 import { TematicController } from './tematic.controller';
+import { VotesController } from './votes.controller';
+import { SculptorController } from './sculptor.controller';
 
 @Module({
   imports: [BusinessModule],
-  controllers: [TematicController,UsersController,SculptureController,ImagesController,HealthController, AuthController, EventController],
+  controllers: [VotesController,TematicController,UsersController,SculptureController,ImagesController,HealthController, AuthController, EventController, SculptorController],
 })
 export class RestModule {}

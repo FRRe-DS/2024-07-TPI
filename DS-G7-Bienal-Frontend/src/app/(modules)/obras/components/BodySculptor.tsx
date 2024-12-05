@@ -45,7 +45,7 @@ export default function BodySculptor({
                   </div>
               </div>
               </header> 
-              <h2 className="text-2xl font-semibold text-gray-900 m-6 text-center">Dashboard</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 m-6 text-center">Menu de escultor</h2>
               {children}
 
           </div>

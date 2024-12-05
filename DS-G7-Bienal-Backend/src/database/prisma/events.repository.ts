@@ -1,4 +1,4 @@
-import { CreateEventDto } from '@dto/events.dto';
+import { CreateEventDto, EditEventDto } from '@dto/events.dto';
 import { Injectable } from '@nestjs/common';
 import { Prisma as PrismaService } from '@prisma';
 import { Event } from '@prisma/client';
@@ -13,7 +13,32 @@ export class EventsRepository{
     }
 
     async findEventById(id:number): Promise<Event | null>{
-        return this.prisma.event.findUnique({where:{id: +id,}})
+        return this.prisma.event.findUnique({where:{id: +id}})
+    }
+
+    async findEventByUuid(uuid:string): Promise<Event | null>{
+        return this.prisma.event.findUnique({where:{uuid}})
+    }
+
+    async editEvent(id_event:number, data:EditEventDto): Promise<Event>{
+        const event = await this.findEventById(id_event)
+        if (!event) throw new Error('Error')
+        const [response] = await this.prisma.$transaction([
+            this.prisma.event.update({
+                where:{id:+id_event},
+                data:{
+                    name:data.name,
+                    dateStart: data.dateStart,
+                    dateEnd:data.dateEnd,
+                    lugar:data.lugar,
+                    descripcion:data.descripcion,
+                    tematicId:data.tematicId
+                    
+                }
+            })
+        ])
+
+        return response
     }
 
     async createEvent(data:CreateEventDto){

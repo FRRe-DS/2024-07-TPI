@@ -11,6 +11,9 @@ import { CloudinaryService } from './cloudinary/cloudinary.service';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { UserBusiness } from './users/user.business';
 import { TematicBusiness } from './tematic/tematic.business';
+import { VotesBusiness } from './votes/votes.business';
+import { QrBusiness } from './votes/qr.business';
+import { SculptorBusiness } from './sculptor/sculptor.business';
 
 const providers: Provider<any>[] = [
   AuthBusiness,
@@ -19,7 +22,10 @@ const providers: Provider<any>[] = [
   SculptureBusiness,
   CloudinaryService,
   UserBusiness,
-  TematicBusiness
+  TematicBusiness,
+  QrBusiness,
+  VotesBusiness,
+  SculptorBusiness
 ];
 
 @Module({

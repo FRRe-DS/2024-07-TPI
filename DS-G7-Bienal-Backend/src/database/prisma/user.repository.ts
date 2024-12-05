@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma as PrismaService } from '@prisma';
-import { RegisterUsuarioDto } from '@dto';
+import { EditProfileDto, RegisterUsuarioDto } from '@dto';
 import * as bcrypt from 'bcryptjs';
 import { Role, User } from '@prisma/client';
 
@@ -27,6 +27,43 @@ export class UserRepository {
   async findAllUsersVisitantes(): Promise<User[]>{
     return await this.prisma.user.findMany({where:{role:Role.VISITANTE}})
   }
+
+  async editProfileUser(data:EditProfileDto, user_id:number): Promise<User>{
+    const user = await this.findUserById(user_id)
+
+    if (!user) throw new Error('Usuario no encontrado');
+
+    const sculpt = await this.prisma.sculptor.findUnique({where:{userId:user_id}}) || null
+
+    if(sculpt){
+      const [updateSculptor] = await this.prisma.$transaction([
+        this.prisma.sculptor.update({
+          where : {userId:user_id},
+          data:{
+            biografia: data.biografia || sculpt.biografia,
+            qr: data.qr || sculpt.qr,
+            obrasPrevias: data.obrasPrevias || sculpt.obrasPrevias
+          }
+        }),
+        
+      ])
+    }
+    const [updateUser] = await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: {id:user_id},
+        data: {
+          name: data.name || user.name,
+          lastname: data.lastname || user.lastname,
+          dni: data.dni || user.dni,
+          email: data.email || user.email,
+          phoneNumber: data.phoneNumber || user.phoneNumber
+        }
+      })
+    ])
+
+    return updateUser
+  }
+
 
   async updateRoleUser(id: number): Promise<User> {
     const user = await this.findUserById(id);
@@ -69,7 +106,7 @@ export class UserRepository {
       email: 'admin@example.com',
       dni: '1111110',
       password: hashedPassword,
-      role: 'ADMIN', // Establecer el rol a ADMIN
+      role: 'ADMIN', 
     }, });
   }
 }

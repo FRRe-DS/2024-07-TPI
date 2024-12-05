@@ -1,3 +1,4 @@
+import { SculptorRepository } from '@prisma/sculptor.repository';
 import { LoginDto, RegisterUsuarioDto } from '@dto';
 import { ResponseClass } from '@handdles';
 import { Injectable } from '@nestjs/common';
@@ -10,8 +11,14 @@ export class AuthBusiness extends ResponseClass {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
+    private readonly sculptorRepository: SculptorRepository
   ) {
     super();
+  }
+
+  async getSculptorProfile(id_user:number) {
+    const profile = await this.sculptorRepository.findSculptorById(id_user)
+    return profile || null
   }
 
   async login(loginDto: LoginDto) {

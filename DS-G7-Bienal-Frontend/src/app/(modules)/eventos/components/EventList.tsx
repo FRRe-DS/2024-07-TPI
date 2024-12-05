@@ -19,8 +19,7 @@ export function EventList({events, search}:{events:Evento[], search:string}) {
         return today > startDate && today <= endDate;
     });
 
-    console.log("eventos act", eventosActuales)
-    console.log("fecha act", today)
+
     const eventosFuturos = filteredEvents.filter(evento => {
         const startDate = new Date(evento.dateStart);
         
@@ -104,13 +103,16 @@ export function EventList({events, search}:{events:Evento[], search:string}) {
                 eventosPasados.length !== 0
                 &&
                 <>
+
                 <h3 className="w-full my-10 text-center text-xl font-bold">Eventos pasados</h3>
+                    
                 {
                     eventosPasados.map((evento:Evento, index:number) => (
-                    <Event evento={evento} index={index} key={index} />
+                        <Event evento={evento} index={index} key={index} />
                     ))
                 }
                 </>
+                
                 }
             </div>
     );

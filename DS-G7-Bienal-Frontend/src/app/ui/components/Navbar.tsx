@@ -1,6 +1,6 @@
 "use client"
 
-import { Admin, Escultor, logout, Usuario } from '@bienal/store/slices/userSlice';
+import {logout, User } from '@bienal/store/slices/userSlice';
 import React from 'react';
 import { useState } from 'react'
 import Link from 'next/link'
@@ -10,9 +10,10 @@ import bienalIcon from '@bienal/assets/bienal-icon.png'
 import { AppDispatch, RootState } from '@bienal/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import RenderLinks from '@bienal/app/(modules)/auth/components/RenderLinksByRole';
-import { useRouter } from 'next/navigation';
-import StoreProvider from '@bienal/app/StoreProvider';
+
 import FetchUser from '@bienal/app/(modules)/auth/components/FetchUser';
+import RenderLinksMobile from '@bienal/app/(modules)/auth/components/RenderLinksByRoleMobile';
+import { useRouter } from 'next/navigation';
 
 interface NavbarProps {
     
@@ -23,11 +24,12 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({  }) => {
     const dispatch: AppDispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+    const router = useRouter();
     const role = useSelector((state:RootState) => state.user.user?.role)
     const isAuth = useSelector((state:RootState) => state.user.isAuth)
     const logoutHandle = () => {
         dispatch(logout())
+        return router.push('/')
     }
 
     
@@ -98,15 +100,19 @@ const Navbar: React.FC<NavbarProps> = ({  }) => {
                     </div>
                     <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg">
-                        <Link href="/" className="text-gray-800 hover:bg-blue-100 hover:text-blue-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Inicio</Link>
-                        <Link href="/productos" className="text-gray-800 hover:bg-blue-100 hover:text-blue-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Productos</Link>
-                        <Link href="/contacto" className="text-gray-800 hover:bg-blue-100 hover:text-blue-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Contacto</Link>
+                        <Link href="/" className="text-gray-800 hover:bg-blue-100 hover:emerald-blue-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Inicio</Link>
+                        {
+                            role ? <RenderLinksMobile userRole={role} /> : <Link href="/auth/login" className="text-gray-800 hover:bg-blue-100 hover:emerald-blue-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Iniciar sesion</Link>
+
+                        }
                         </div>
                         <div className="pt-4 pb-3 border-t border-gray-200 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg">
                             <div className="px-2">
                             
-                                    
-                                <Button text='Cerrar Sesion' onClick={logoutHandle}/>
+                                {
+                                    role&&
+                                    <Button text='Cerrar Sesion' onClick={logoutHandle}/>
+                                }
                                     
                             </div>
                         </div>

@@ -73,6 +73,8 @@ input UserInputType {
 
 type Query {
   exampleQuery: JSON!
+  generateQRCode(sculptureId: String!): String!
+  validateQRCode(id: String!): Boolean!
 }
 
 """

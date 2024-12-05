@@ -1,10 +1,10 @@
 "use client"
 
-import { AbsUser } from "@bienal/store/slices/userSlice"
+import { User } from "@bienal/store/slices/userSlice"
 import axios from "axios";
 import { useState } from "react";
 
-export function UpgradeModal({user, closeModal, reFetch}: {user:AbsUser, closeModal:()=>void, reFetch:()=>void}){
+export function UpgradeModal({user, closeModal, reFetch}: {user:User, closeModal:()=>void, reFetch:()=>void}){
 
     const [msg, setMsg] = useState<string | null>(null)
 

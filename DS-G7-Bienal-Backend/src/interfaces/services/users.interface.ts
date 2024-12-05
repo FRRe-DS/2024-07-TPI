@@ -14,11 +14,12 @@ export interface UserInterface {
     phoneNumber?:string
     role: Role
     dni?:string
-    escultor?:SculptorInterface
+    escultor?:SculptorInterface | null
 }
 
 export interface SculptorInterface{
-    obrasPrevias?:string
-    biografia:string
-    qr?:string
+    obrasPrevias:string|null
+    biografia:string|null
+    qr:string|null
+    user?: UserInterface 
 }

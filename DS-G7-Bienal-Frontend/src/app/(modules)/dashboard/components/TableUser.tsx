@@ -1,18 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AbsUser } from "@bienal/store/slices/userSlice";
+import { User } from "@bienal/store/slices/userSlice";
 import { CircleFadingArrowUp } from "lucide-react";
 import { UpgradeModal } from "./UpgradeModal";
 
 export function TableUser({ params }: { params: string }) {
-    const [users, setUsers] = useState<AbsUser[]>([]);
-    const [filteredUsers, setFilteredUsers] = useState<AbsUser[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const [selectedUser, setSelectedUser] = useState<AbsUser | null>(null);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-    const handleModal = (user: AbsUser | null) => {
+    const handleModal = (user: User | null) => {
         setSelectedUser(user); 
     };
 

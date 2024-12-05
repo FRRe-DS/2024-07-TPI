@@ -1,9 +1,14 @@
 import { Evento } from '@bienal/app/types/eventosType';
 import { MapPin, Calendar } from 'lucide-react';
+import Link from 'next/link';
 
 export function EventCard({ evento, index, isOngoing }: { evento: Evento; index: number, isOngoing:boolean }) {
+  
+
   return (
-    <article key={index} className={`${isOngoing?'border-solid border-2 border-emerald-700 ':''} group relative m-4 p-6 rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-lg z-0 overflow-hidden`}>
+
+    <article key={index} className={`${isOngoing?'border-solid border-2 cursor-pointer border-emerald-700 ':''} group relative m-4 p-6 rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-lg z-0 overflow-hidden`}>
+      <Link href={`eventos/detail/${evento.uuid}`}>
       <div className="absolute inset-0 bg-emerald-600/10 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition-opacity duration-300" />
       <div className="relative z-10 space-y-4">
         <h3 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300">
@@ -23,6 +28,7 @@ export function EventCard({ evento, index, isOngoing }: { evento: Evento; index:
           </span>
         </div>
       </div>
+      </Link>
     </article>
   )
 }

@@ -8,10 +8,12 @@ import { graphQLFactory, jwtFactory } from "@factories";
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserResolver } from "./user.resolver";
 import { JwtStrategy } from "@business/auth/jwt.strategy";
+import { QrResolver } from "./qr.resolver";
 
 
 const resolver: Provider[] = [
-  UserResolver
+  UserResolver,
+  QrResolver
 ];
 
 @Module({

@@ -3,6 +3,7 @@ import { EventEditCard } from "../../components/EventEditCard";
 
 
 export default async function Page(){
+  
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}event/list`, {
     cache: "no-store"
   });

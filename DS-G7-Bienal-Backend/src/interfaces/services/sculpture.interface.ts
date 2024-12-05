@@ -1,6 +1,8 @@
 import { UserInterface } from "./users.interface";
 
+
 export interface SculptureInterface{
+    uuid:string,
     id:number,
     sculptor:UserInterface,
     name:string
@@ -10,6 +12,8 @@ export interface SculptureInterface{
     qr?:string
     images: ImagesInterface[]
 }
+
+export type PureSculture = Omit<SculptureInterface, 'sculptor'>
 
 /*
 model Sculpture {

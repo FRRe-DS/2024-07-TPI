@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { Home, ShoppingBag, Users, BarChart2, Settings, Menu } from 'lucide-react'
 
 
 interface RenderLinksProps {
@@ -21,7 +20,7 @@ const RenderLinks: React.FC<RenderLinksProps> = ({
         ],
         ADMIN: [
             { href: '/dashboard', label: 'Dashboard' },
-            { href: '/users', label: 'Escultores' },
+            { href: '/dashboard/escultores/ver', label: 'Escultores' },
         ],
         VISITANTE: [
             { href: '/contact', label: 'Votaciones' },

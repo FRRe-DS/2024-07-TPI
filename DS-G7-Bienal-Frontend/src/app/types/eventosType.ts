@@ -2,6 +2,7 @@ import { Tematic } from "./tematicType"
 
 export interface Evento {
     id:number,
+    uuid:string,
     name:string,
     dateStart:Date,
     dateEnd:Date,
